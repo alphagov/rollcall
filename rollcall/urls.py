@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+from rollcall.groups.views import GroupListView, GroupDetailView
 from rollcall.people.views import PersonListView, PersonDetailView
 
 
@@ -23,5 +24,16 @@ urlpatterns = patterns('',
         r'^people/(?P<slug>.*)$',
             PersonDetailView.as_view(),
             name='person-detail',
+    ),
+
+    url(
+        r'^group/$',
+            GroupListView.as_view(),
+            name='group-list',
+    ),
+    url(
+        r'^group/(?P<slug>.*)$',
+            GroupDetailView.as_view(),
+            name='group-detail',
     ),
 )
