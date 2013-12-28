@@ -23,6 +23,9 @@ SECRET_KEY = '^6tv3_h$mzgwb5b@)5@91ttg4fuvfz+4k^q%p1tqaya4t!*ah#'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates')
+)
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     
     'south',
+
+    'rollcall.people',
 )
 
 MIDDLEWARE_CLASSES = (
