@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
+{% load render_as %}
 
 {% block body %}
-  <h1>{{group.name}}</h1>
+  <h1>{{group}}</h1>
   <dl>
     <dt>Email</dt>
     <dd>{{group.email}}</dd>
+    <dt>Owner(s)</dt>
+    {% for owner in group.owners %}
+      <dd>{% render_as owner.person clickable %}</dd>
+    {% endfor %}
+    <dt>Member(s)</dt>
+    {% for member in group.members.all %}
+      <dd>{% render_as member clickable %}</dd>
+    {% endfor %}
   </dl>
 {% endblock %}
