@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block body %}
-  <h1>{{person}}</h1>
+  <h1>
+    <img src='{{person.avatar_url}}.png?d=mm&amp;s=200' width='200' height='200' alt=''> 
+    {{person}}
+  </h1>
   <dl>
     <dt>Email</dt>
     <dd>{{person.email}}</dd>
