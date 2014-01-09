@@ -8,6 +8,12 @@
   <dl>
     <dt>Email</dt>
     <dd>{{person.email}}</dd>
+    <dt>Role</dt>
+    {% if person.role %}
+      <dd>{{person.role}}</dd>
+    {% else %}
+      <dd><b>unknown</b></dd>
+    {% endif %}
     <dt>Manager</dt>
     {% if person.manager %}
       <dd><a href='{% url "person-detail" slug=person.manager.slug %}'>{{person.manager}}</a></dd>

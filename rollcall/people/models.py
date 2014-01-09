@@ -23,6 +23,11 @@ class Person(models.Model):
                 return first_owner.person
         return None
 
+    def role(self):
+        for membership in self.membership_set.filter(role='MEMBER'):
+            if membership.group.email.find('gds-role') == 0:
+                return membership.group.name
+
     def memberships(self):
         return self.membership_set.all()
 
