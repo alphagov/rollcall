@@ -8,9 +8,11 @@
   <dl>
     <dt>Email</dt>
     <dd>{{person.email}}</dd>
-    <dt>Role</dt>
-    {% if person.role %}
-      <dd>{{person.role}}</dd>
+    <dt>Role(s)</dt>
+    {% if person.roles %}
+      {% for role in person.roles %}
+        <dd>{{role.name}}</dd>
+      {% endfor %}
     {% else %}
       <dd><b>unknown</b></dd>
     {% endif %}

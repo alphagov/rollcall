@@ -23,10 +23,12 @@ class Person(models.Model):
                 return first_owner.person
         return None
 
-    def role(self):
+    def roles(self):
+        roles = []
         for membership in self.memberships_as_member():
             if membership.group.email.find('gds-role') == 0:
-                return membership.group.name
+                roles.append(membership.group)
+        return roles
 
     @property
     def clan(self):
