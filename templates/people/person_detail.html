@@ -14,6 +14,12 @@
     {% else %}
       <dd><b>unknown</b></dd>
     {% endif %}
+    <dt>Clan</dt>
+    {% if person.clan %}
+      <dd>{{person.clan}}</dd>
+    {% else %}
+      <dd><b>unknown</b></dd>
+    {% endif %}
     <dt>Manager</dt>
     {% if person.manager %}
       <dd><a href='{% url "person-detail" slug=person.manager.slug %}'>{{person.manager}}</a></dd>
