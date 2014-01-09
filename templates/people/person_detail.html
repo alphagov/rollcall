@@ -8,6 +8,18 @@
   <dl>
     <dt>Email</dt>
     <dd>{{person.email}}</dd>
+    <dt>Manager</dt>
+    {% if person.manager %}
+      <dd><a href='{% url "person-detail" slug=person.manager.slug %}'>{{person.manager}}</a></dd>
+    {% else %}
+      <dd><b>unknown</b></dd>
+    {% endif %}
+    {% if person.person_set.count %}
+      <dt>Manages</dt>
+      {% for minion in person.person_set.all %}
+        <dd><a href='{% url "person-detail" slug=minion.slug %}'>{{minion}}</a></dd>
+      {% endfor %}
+    {% endif %}
   </dl>
 
   <h2>On lists</h2>
