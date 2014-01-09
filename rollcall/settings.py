@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     
     'south',
+    'render_as',
 
     'rollcall.groups',
     'rollcall.people',

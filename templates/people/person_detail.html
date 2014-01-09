@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load render_as %}
 
 {% block body %}
   <h1>
@@ -36,14 +37,19 @@
     {% endif %}
   </dl>
 
-  <h2>On lists</h2>
+  {% if person.memberships_as_owner.count %}
+    <h2>Owns lists ({{person.memberships_as_owner.count}})</h2>
+    <ul>
+      {% for list in person.memberships_as_owner %}
+        <li>{% render_as list.group clickable %}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <h2>Subscribed to lists ({{person.memberships_as_member.count}})</h2>
   <ul>
-    {% for m in person.memberships %}
-      <li>
-        {% if m.role == 'OWNER' %}<b>owns</b>{% endif %}
-        <a href='{% url "group-detail" slug=m.group.slug %}'>{{ m.group.name }}</a>
-        &lt;{{ m.group.email}}&gt;
-      </li>
+    {% for list in person.memberships_as_member %}
+      <li>{% render_as list.group clickable %}</li>
     {% endfor %}
   </ul>
 {% endblock %}
