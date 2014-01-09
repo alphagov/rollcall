@@ -34,6 +34,13 @@ class Person(models.Model):
             if membership.group.email.find('gds-clan') == 0:
                 return membership.group.name
 
+    @property
+    def is_head_of_clan(self):
+        for membership in self.memberships_as_owner():
+            if membership.group.email.find('gds-clan') == 0:
+                return True
+        return False
+
     def memberships(self):
         return self.membership_set.all()
 
