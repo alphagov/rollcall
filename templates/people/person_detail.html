@@ -28,9 +28,9 @@
     {% else %}
       <dd><b>unknown</b></dd>
     {% endif %}
-    {% if person.person_set.count %}
+    {% if person.manages %}
       <dt>Manages</dt>
-      {% for minion in person.person_set.all %}
+      {% for minion in person.manages %}
         <dd><a href='{% url "person-detail" slug=minion.slug %}'>{{minion}}</a></dd>
       {% endfor %}
     {% endif %}

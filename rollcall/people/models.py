@@ -23,6 +23,14 @@ class Person(models.Model):
                 return first_owner.person
         return None
 
+    def manages(self):
+        manages = []
+        for membership in self.memberships_as_owner():
+            if membership.group.email.find('gds-reports') == 0:
+                for list_member in membership.group.membership_set.filter(role='MEMBER'):
+                    manages.append(list_member.person)
+        return manages
+
     def roles(self):
         roles = []
         for membership in self.memberships_as_member():
