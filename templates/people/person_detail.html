@@ -9,4 +9,15 @@
     <dt>Email</dt>
     <dd>{{person.email}}</dd>
   </dl>
+
+  <h2>On lists</h2>
+  <ul>
+    {% for m in person.memberships %}
+      <li>
+        {% if m.role == 'OWNER' %}<b>owns</b>{% endif %}
+        <a href='{% url "group-detail" slug=m.group.slug %}'>{{ m.group.name }}</a>
+        &lt;{{ m.group.email}}&gt;
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock %}
