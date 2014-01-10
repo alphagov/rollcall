@@ -3,9 +3,11 @@
 {% block body %}
   <h1>Group States</h1>
   <ul>
-    <li><a href='/group-state/un'>{{states.un}} Unknown groups — to be investigated</a></li>
-    <li><a href='/group-state/kn'>{{states.kn}} Known groups</a></li>
-    <li><a href='/group-state/of'>{{states.of}} Old format groups — need to be migrated</a></li>
-    <li><a href='/group-state/f1'>{{states.f1}} New format groups</a></li>
+    {% for state in states %}
+      <li>
+        <a href='{% url "group-list-by-state" state=state.id %}'>{{state.desc}}</a>
+        ({{state.count}})
+      </li>
+    {% endfor %}
   </ul>
 {% endblock %}

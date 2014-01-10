@@ -5,7 +5,7 @@ from django.views.generic import (
 )
 from django.views.generic.edit import UpdateView
 
-from rollcall.groups.models import Group
+from rollcall.groups.models import Group, GroupState
 
 
 class GroupDetailView(DetailView):
@@ -23,12 +23,14 @@ class GroupStatesView(TemplateView):
 
     def get_context_data(self):
         context = super(GroupStatesView, self).get_context_data()
-        context['states'] = {
-            'un': Group.objects.filter(state='un').count(),
-            'kn': Group.objects.filter(state='kn').count(),
-            'of': Group.objects.filter(state='of').count(),
-            'f1': Group.objects.filter(state='f1').count(),
-        }
+        context['states'] = GroupState(
+            item=lambda c: {
+                'id': c.id,
+                'name': c.name,
+                'desc': c.desc,
+                'count': Group.objects.filter(state=c).count(),
+            }
+        )
         return context
 
 
