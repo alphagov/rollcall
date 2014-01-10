@@ -3,6 +3,7 @@ from django.views.generic import (
     ListView,
     TemplateView,
 )
+from django.views.generic.edit import UpdateView
 
 from rollcall.groups.models import Group
 
@@ -37,3 +38,8 @@ class GroupStateListView(ListView):
 
     def get_queryset(self):
         return Group.objects.filter(state=self.kwargs['state'])
+
+
+class GroupUpdate(UpdateView):
+    model = Group
+    fields = [ 'state' ]

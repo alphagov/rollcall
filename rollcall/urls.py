@@ -8,6 +8,7 @@ from rollcall.groups.views import (
     GroupDetailView,
     GroupStatesView,
     GroupStateListView,
+    GroupUpdate,
 )
 from rollcall.people.views import PersonListView, PersonDetailView
 
@@ -35,6 +36,11 @@ urlpatterns = patterns('',
         r'^group/$',
             GroupListView.as_view(),
             name='group-list',
+    ),
+    url(
+        r'^group/(?P<slug>.*?)/state$',
+        GroupUpdate.as_view(),
+        name='group-state',
     ),
     url(
         r'^group/(?P<slug>.*)$',

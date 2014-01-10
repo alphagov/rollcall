@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h1>{{group.name}}</h1>
+  <p>{{group.email}}</p>
+  
+  <form method='POST' action=''>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type='submit'>Save</button>
+  </form>
+{% endblock %}

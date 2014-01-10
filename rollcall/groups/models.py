@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from autoslug import AutoSlugField
 from dj.choices import Choices, Choice
@@ -30,6 +31,9 @@ class Group(models.Model):
 
     def owners(self):
         return self.membership_set.filter(role='OWNER')
+
+    def get_absolute_url(self):
+        return reverse( 'group-detail', kwargs={ 'slug': self.slug } )
 
     def __unicode__(self):
         return self.email
