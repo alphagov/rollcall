@@ -6,6 +6,11 @@
   <dl>
     <dt>Email</dt>
     <dd>{{group.email}}</dd>
+    <dt>State</dt>
+    <dd>
+      {{group.state}} 
+      <a href='{% url "group-state" slug=group.slug %}'>change</a>
+    </dd>
     <dt>Owner(s)</dt>
     {% for owner in group.owners %}
       <dd>{% render_as owner.person clickable %}</dd>
