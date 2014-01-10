@@ -44,11 +44,11 @@ urlpatterns = patterns('',
     url(
         r'^group-state/$',
             GroupStatesView.as_view(),
-            name='group-states',
+            name='group-list-states',
     ),
     url(
         r'^group-state/(?P<state>.*)$',
             GroupStateListView.as_view(),
-            name='group-state-list',
+            name='group-list-by-state',
     ),
 )
