@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Group.state'
         db.add_column(u'groups_group', 'state',
-                      self.gf('django.db.models.fields.CharField')(default='un', max_length=2),
+                      self.gf(u'dj.choices.fields.ChoiceField')(unique=False, primary_key=False, db_column=None, blank=False, default=1, null=False, _in_south=True, db_index=False),
                       keep_default=False)
 
 
@@ -28,7 +28,7 @@ class Migration(SchemaMigration):
             'members': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['people.Person']", 'through': u"orm['groups.Membership']", 'symmetrical': 'False'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': "'name'", 'unique_with': '()'}),
-            'state': ('django.db.models.fields.CharField', [], {'default': "'un'", 'max_length': '2'}),
+            'state': (u'dj.choices.fields.ChoiceField', [], {'unique': 'False', 'primary_key': 'False', 'db_column': 'None', 'blank': 'False', u'default': '1', 'null': 'False', '_in_south': 'True', 'db_index': 'False'}),
             'sublists': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['groups.Group']", 'null': 'True', 'blank': 'True'})
         },
         u'groups.membership': {

@@ -1,9 +1,18 @@
 from django.db import models
 
 from autoslug import AutoSlugField
+from dj.choices import Choices, Choice
+from dj.choices.fields import ChoiceField
 
 from rollcall.people.models import Person
 
+
+
+class GroupState(Choices):
+    unknown = Choice('Unknown: investigate')
+    known = Choice('Known')
+    old_format = Choice('Old format: should be migrated')
+    format_one = Choice('New format')
 
 
 class Group(models.Model):
@@ -17,13 +26,7 @@ class Group(models.Model):
     sublists = models.ManyToManyField( 'self', symmetrical=False, blank=True, null=True )
 
     # state
-    STATES = (
-        ('un', 'unknown: investigate'),
-        ('kn', 'known: not to be migrated'),
-        ('of', 'old format: should be migrated'),
-        ('f1', 'new format: fine as is'),
-    )
-    state = models.CharField( max_length=2, choices=STATES, default='un' )
+    state = ChoiceField( choices=GroupState, default=GroupState.unknown )
 
     def owners(self):
         return self.membership_set.filter(role='OWNER')
