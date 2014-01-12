@@ -2,22 +2,26 @@
 {% load render_as %}
 
 {% block body %}
+<section class="group-details">
   <h1>{{group}}</h1>
   <dl>
     <dt>Email</dt>
     <dd>{{group.email}}</dd>
+
     <dt>State</dt>
     <dd>
       {{group.state}} 
       <a href='{% url "group-state" slug=group.slug %}'>change</a>
     </dd>
+
     <dt>Owner(s)</dt>
     {% for owner in group.owners %}
       <dd>{% render_as owner.person clickable %}</dd>
     {% endfor %}
     <dt>Member(s)</dt>
     {% for member in group.members.all %}
-      <dd>{% render_as member clickable %}</dd>
+      <dd class="group-members">{% render_as member clickable %}</dd>
     {% endfor %}
   </dl>
+</section>
 {% endblock %}
