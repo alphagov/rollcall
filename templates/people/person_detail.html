@@ -38,18 +38,22 @@
   </dl>
 
   {% if person.memberships_as_owner.count %}
+    <section class="owns-lists">
     <h2>Owns lists ({{person.memberships_as_owner.count}})</h2>
     <ul>
       {% for list in person.memberships_as_owner %}
         <li>{% render_as list.group clickable %}</li>
       {% endfor %}
     </ul>
+    </section>
   {% endif %}
 
+  <section class="subscribed-to-lists">
   <h2>Subscribed to lists ({{person.memberships_as_member.count}})</h2>
   <ul>
     {% for list in person.memberships_as_member %}
       <li>{% render_as list.group clickable %}</li>
     {% endfor %}
   </ul>
+  <section>
 {% endblock %}
