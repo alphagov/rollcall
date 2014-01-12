@@ -2,6 +2,6 @@
 
 {% block body %}
   {% for person in people %}
-    <li><a href='{% url "person-detail" slug=person.slug %}'>{{person}}</a></li>
+    <li class="person"><a href='{% url "person-detail" slug=person.slug %}'>{{person}}</a></li>
   {% endfor %}
 {% endblock %}

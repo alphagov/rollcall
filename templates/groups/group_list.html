@@ -2,6 +2,6 @@
 
 {% block body %}
   {% for group in groups %}
-    <li><a href='{% url "group-detail" slug=group.slug %}'>{{group.name}}</a></li>
+    <li class="group"><a href='{% url "group-detail" slug=group.slug %}'>{{group.name}}</a></li>
   {% endfor %}
 {% endblock %}
