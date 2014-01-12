@@ -97,8 +97,14 @@ a:visited {
 
 header h1 {
   font-weight:200;
-  margin:0 0 0 30px;
+  margin:0 0 0 15px;
   padding:0;
+}
+
+@media all and (min-width: 960px) {
+  header h1 {
+    margin:0 0 0 30px;
+  }
 }
 
 header h1 a,
@@ -112,16 +118,34 @@ header h1 a:hover {
 }
 
 footer p {
-  margin:0 0 0 30px;
+  margin:0 0 0 15px;
+}
+
+@media all and (min-width: 960px) {
+  footer p {
+    margin:0 0 0 30px;
+  }
 }
 
 #content {
-  margin:30px;
-  max-width:1280px;
+  margin:15px;
+}
+
+@media all and (min-width: 960px) {
+  #content {
+    margin:30px;
+    max-width:1280px;
+  }
 }
 
 #content h1 {
-  margin: 0 30px 20px 0;
+  margin: 0 0 20px 0;
+}
+
+@media all and (min-width: 960px) {
+  #content h1 {
+    margin: 0 30px 20px 0;
+  }
 }
 
 #content h2 {
@@ -149,9 +173,17 @@ li, dd {
 
 li.person,
 dd.group-members {
-  width:25%;
-  max-width:300px;
+  width:100%;
   float:left;
+}
+
+@media all and (min-width: 960px) {
+  li.person,
+  dd.group-members {
+    width:25%;
+    max-width:300px;
+    float:left;
+  }  
 }
 
 dl {
@@ -159,18 +191,31 @@ dl {
 }
 
 section.person-details {
-  position: relative;
-  float:left;
-  width:25%;
-  max-width:300px;
+  width:100%;
+  max-width:380px;
   margin-top: 5px;
+  margin-bottom: 50px;
+}
+
+@media all and (min-width: 960px) {
+  section.person-details {
+    position: relative;
+    float:left;
+    width:25%;
+  }
 }
 
 section.lists {
-  position: relative;
-  float:left;
-  width:75%;
+  width:100%;
   margin-top:3px;
+}
+
+@media all and (min-width: 960px) {
+  section.lists {
+    position: relative;
+    float:left;
+    width:75%;
+  }
 }
 
 section.owns-lists,
@@ -179,9 +224,15 @@ section.subscribed-to-lists {
 }
 
 li.group {
-  width:50%;
-  max-width:550px;
-  float:left;
+  width:100%;
+}
+
+@media all and (min-width: 960px) {
+  li.group {
+    width:50%;
+    max-width:550px;
+    float:left;
+  }
 }
 
 dt {
