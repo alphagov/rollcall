@@ -2,8 +2,9 @@
 {% load render_as %}
 
 {% block body %}
+  <section class="person-details">
   <h1>
-    <img src='{{person.avatar_url}}.png?d=mm&amp;s=200' width='200' height='200' alt=''> 
+    <img src='{{person.avatar_url}}.png?d=mm&amp;s=200' width='200' height='200' alt=''>
     {{person}}
   </h1>
   <dl>
@@ -36,12 +37,13 @@
       {% endfor %}
     {% endif %}
   </dl>
+  </section>
 
   <section class="lists">
-    
+
     {% if person.memberships_as_owner.count %}
       <section class="owns-lists">
-      <h2>Owns lists ({{person.memberships_as_owner.count}})</h2>
+      <h2>Owns {{person.memberships_as_owner.count}} mailing lists</h2>
       <ul>
         {% for list in person.memberships_as_owner %}
           <li>{% render_as list.group clickable %}</li>
@@ -51,7 +53,7 @@
     {% endif %}
 
     <section class="subscribed-to-lists">
-    <h2>Subscribed to lists ({{person.memberships_as_member.count}})</h2>
+    <h2>Subscribed to {{person.memberships_as_member.count}} mailing lists</h2>
     <ul>
       {% for list in person.memberships_as_member %}
         <li>{% render_as list.group clickable %}</li>

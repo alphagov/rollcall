@@ -73,16 +73,37 @@ header {
 footer {
   width:100%;
   padding:15px 0;
-  margin-top:55px;
-  border-top:1px solid #C5C5C5;
+  margin-top:200px;
+  border-top:1px solid #d5d5d5;
   display: inline-block;
 }
 
+h1, 
+h2 {
+  font-size:30px;
+  line-height: 36px;
+  font-weight:600;
+}
+
+a,
+a:active,
+a:visited {
+  color:#0094DD;
+  text-decoration: none;
+  border-bottom:1px solid #0094DD;
+}
+
+
 header h1 {
-  color:white;
-  font-size: 28px;
-  font-weight:300;
+  font-weight:200;
   margin:0 0 0 30px;
+  padding:0;
+}
+
+header h1 a,
+header h1 a:visited {
+  color:white;
+  text-decoration: none;
 }
 
 footer p {
@@ -91,30 +112,24 @@ footer p {
 
 #content {
   margin:30px;
-  min-height:572px;
 }
 
 #content h1 {
-  font-size:36px;
-  line-height: 42px;
-  font-weight: bold;
-  padding: 0 0 20px 0;
-  margin:0 0 0 0;
-  max-width:280px;
+  max-width:240px;
+  margin: 0 0 20px 0;
 }
 
 #content h2 {
-  font-size:36px;
-  font-weight: bold;
-  margin:0 0 20px 0;
+  font-size:24px;
+  font-weight: 200;
+  margin: 0 0 20px 0;
 }
 
 h1 img {
-  /*border-radius:50%;*/
   width: 240px;
   height: 240px;
   vertical-align: top;
-  margin-bottom:20px;
+  margin:0 0 20px 0;
 }
 
 ul {
@@ -131,11 +146,26 @@ li.person {
   width:25%;
   float:left;
 }
-section.owns-lists
-section.subscribed-to-lists {
 
+section.person-details {
+  position: relative;
+  float:left;
+  margin-right:15px;
+  padding-right:30px;
 }
 
+section.lists {
+  position: relative;
+  float:left;
+  margin-top:2px;
+  padding-top:10px;
+  border-top:1px solid #d5d5d5;
+}
+
+section.owns-lists,
+section.subscribed-to-lists {
+  margin-bottom:50px;
+}
 
 li.group {
   width:50%;
@@ -156,14 +186,6 @@ dl dd {
   word-wrap:break-word;
 }
 
-a,
-a:active,
-a:visited {
-  color:#0094DD;
-  text-decoration: none;
-  border-bottom:1px solid #0094DD;
-}
-
 
     </style>
   </head>
@@ -171,7 +193,7 @@ a:visited {
     <div id='main'>
       <header>
         <h1>
-          GDS Rollcall
+          <a href="http://localhost:8000/people">GDS Rollcall</a>
         </h1>
       </header>
       <div id='content'>
