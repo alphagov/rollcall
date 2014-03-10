@@ -7,6 +7,9 @@ from autoslug import AutoSlugField
 
 
 class Person(models.Model):
+    class Meta:
+        verbose_name_plural = 'people'
+
     name = models.CharField( max_length=256 )
     email = models.CharField( max_length=256, unique=True )
     google_id = models.CharField( max_length=64 )
