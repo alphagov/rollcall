@@ -25,7 +25,7 @@ class Group(models.Model):
         -
         (?P<subject_type>[a-z0-9]+)  # e.g. team, role, topic
         -
-        (?P<subject>[a-z0-9]+)
+        (?P<subject>[a-z0-9-]+)
         -
         (?P<list_type>announce|discuss|members)
         @
