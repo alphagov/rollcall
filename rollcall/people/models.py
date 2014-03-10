@@ -1,4 +1,4 @@
-import md5
+from hashlib import md5
 
 from django.db import models
 
@@ -14,7 +14,7 @@ class Person(models.Model):
 
     @property
     def avatar_url(self):
-        return 'http://gravatar.com/avatar/%s' % md5.new(self.email).hexdigest()
+        return 'http://gravatar.com/avatar/%s' % md5(self.email).hexdigest()
 
     def manager(self):
         for membership in self.memberships_as_member():
