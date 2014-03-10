@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from django.core.urlresolvers import reverse
 
@@ -17,6 +18,21 @@ class GroupState(Choices):
 
 
 class Group(models.Model):
+    QUAD_FORMAT_PATTERN = re.compile(
+        """
+        ^
+        (?P<scope>[a-z0-9]+)
+        -
+        (?P<subject_type>[a-z0-9]+)  # e.g. team, role, topic
+        -
+        (?P<subject>[a-z0-9]+)
+        -
+        (?P<list_type>announce|discuss|members)
+        @
+        """,
+        re.IGNORECASE | re.VERBOSE
+    )
+
     name = models.CharField( max_length=256 )
     email = models.CharField( max_length=256 )
     description = models.CharField( max_length=256 )
@@ -37,6 +53,10 @@ class Group(models.Model):
 
     def __unicode__(self):
         return self.email
+
+    @property
+    def is_quad_format(self):
+        return self.QUAD_FORMAT_PATTERN.match(self.email) is not None
 
 
 class Membership(models.Model):
