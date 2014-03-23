@@ -17,6 +17,14 @@
     {% else %}
       <dd><b>unknown</b></dd>
     {% endif %}
+    <dt>Team(s)</dt>
+    {% if person.teams %}
+      {% for team in person.teams %}
+        <dd>{{team.name}}</dd>
+      {% endfor %}
+    {% else %}
+      <dd><b>No teams</b></dd>
+    {% endif %}
     <dt>Clan</dt>
     {% if person.clan %}
       <dd>{{person.clan}}</dd>

@@ -44,6 +44,16 @@ class Person(models.Model):
         )
         return map(lambda m: m.group, memberships)
 
+    def teams(self):
+        from rollcall.groups.models import GroupState
+
+        memberships = self.membership_set.filter(
+            group__state=GroupState.format_one,
+            group__list_type='members',
+            group__subject_type='team'
+        )
+        return map(lambda m: m.group, memberships)
+
     @property
     def clan(self):
         for membership in self.membership_set.all():
