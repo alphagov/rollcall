@@ -35,11 +35,14 @@ class Person(models.Model):
         return manages
 
     def roles(self):
-        roles = []
-        for membership in self.memberships_as_member():
-            if membership.group.email.find('gds-role') == 0:
-                roles.append(membership.group)
-        return roles
+        from rollcall.groups.models import GroupState
+
+        memberships = self.membership_set.filter(
+            group__state=GroupState.format_one,
+            group__list_type='members',
+            group__subject_type='role'
+        )
+        return map(lambda m: m.group, memberships)
 
     @property
     def clan(self):
