@@ -19,11 +19,19 @@ class Person(models.Model):
     def avatar_url(self):
         return 'http://gravatar.com/avatar/%s' % md5(self.email).hexdigest()
 
+    def membership_by_type(self, subject_type, list_type='members'):
+        from rollcall.groups.models import GroupState
+
+        return self.membership_set.filter(
+            group__state=GroupState.format_one,
+            group__list_type=list_type,
+            group__subject_type=subject_type,
+        )
+
     def manager(self):
-        for membership in self.memberships_as_member():
-            if membership.group.email.find('gds-reports') == 0:
-                first_owner = membership.group.owners()[0]
-                return first_owner.person
+        list = self.membership_by_type('reports').filter(role='MEMBER')
+        if list:
+            return list[0].group.owners()[0].person
         return None
 
     def manages(self):
@@ -35,23 +43,12 @@ class Person(models.Model):
         return manages
 
     def roles(self):
-        from rollcall.groups.models import GroupState
-
-        memberships = self.membership_set.filter(
-            group__state=GroupState.format_one,
-            group__list_type='members',
-            group__subject_type='role'
-        )
+        memberships = self.membership_by_type('role')
         return map(lambda m: m.group, memberships)
 
     def teams(self):
-        from rollcall.groups.models import GroupState
+        memberships = self.membership_by_type('team')
 
-        memberships = self.membership_set.filter(
-            group__state=GroupState.format_one,
-            group__list_type='members',
-            group__subject_type='team'
-        )
         return map(lambda m: m.group, memberships)
 
     @property
