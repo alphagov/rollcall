@@ -48,7 +48,10 @@ class Person(models.Model):
 
     def teams(self):
         memberships = self.membership_by_type('team')
+        return map(lambda m: m.group, memberships)
 
+    def subscribed_topics(self):
+        memberships = self.membership_by_type('topic', 'discuss')
         return map(lambda m: m.group, memberships)
 
     @property

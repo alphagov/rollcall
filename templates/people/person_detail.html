@@ -45,6 +45,13 @@
     {% endif %}
   </dl>
 
+  <h2>Interested in topics</h2>
+  <ul>
+    {% for list in person.subscribed_topics %}
+      <li>{% render_as list clickable %}</li>
+    {% endfor %}
+  </ul>
+
   {% if person.memberships_as_owner.count %}
     <h2>Owns lists ({{person.memberships_as_owner.count}})</h2>
     <ul>
