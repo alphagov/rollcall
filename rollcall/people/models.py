@@ -19,14 +19,17 @@ class Person(models.Model):
     def avatar_url(self):
         return 'http://gravatar.com/avatar/%s' % md5(self.email).hexdigest()
 
-    def membership_by_type(self, subject_type, list_type='members'):
+    def membership_by_type(self, subject_type, list_type='members', area=None):
         from rollcall.groups.models import GroupState
 
-        return self.membership_set.filter(
-            group__state=GroupState.format_one,
-            group__list_type=list_type,
-            group__subject_type=subject_type,
-        )
+        filter = {
+            'group__state': GroupState.format_one,
+            'group__list_type': list_type,
+            'group__subject_type': subject_type,
+        }
+        if area is not None:
+            filter['group__area'] = area
+        return self.membership_set.filter(**filter)
 
     def manager(self):
         list = self.membership_by_type('reports').filter(role='MEMBER')
@@ -56,9 +59,10 @@ class Person(models.Model):
 
     @property
     def clan(self):
-        for membership in self.membership_set.all():
-            if membership.group.email.find('gds-clan') == 0:
-                return membership.group.name
+        list = self.membership_by_type('clan', area='gds')
+        if list:
+            return list[0].group.name
+        return None
 
     @property
     def is_head_of_clan(self):
