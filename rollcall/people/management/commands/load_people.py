@@ -6,6 +6,7 @@ from oauth2client.file import Storage
 from oauth2client.tools import run
 
 from django.core.management.base import BaseCommand
+from django.db.utils import IntegrityError
 
 from rollcall.people.models import Person
 
@@ -44,11 +45,18 @@ class Command(BaseCommand):
                 fetch_more = False
 
             for item in list_people['users']:
-                person, created = Person.objects.get_or_create(
-                    name = item['name']['fullName'],
-                    email = item['primaryEmail'],
-                    google_id = item['id'],
-                )
-                if created:
-                    person.save()
-                    print 'Added %s <%s>' % ( person.name, person.email )
+                try:
+                    full_name = item['name']['fullName']
+                    email = item['primaryEmail']
+
+                    person, created = Person.objects.get_or_create(
+                        name = full_name,
+                        email = email,
+                        google_id = item['id'],
+                    )
+                    if created:
+                        person.save()
+                        print 'Added %s <%s>' % ( person.name, person.email )
+                except IntegrityError as error:
+                    print 'Error creating %s <%s>: %s' % \
+                        ( full_name, email, error )
