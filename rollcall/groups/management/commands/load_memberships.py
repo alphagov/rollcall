@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from rollcall.groups.models import Group, Membership
 from rollcall.people.models import Person
+from rollcall.directory import directory_service
 
 
 
@@ -17,20 +18,7 @@ class Command(BaseCommand):
     help = 'help'
 
     def handle(self, *args, **options):
-        flow = flow_from_clientsecrets(
-            'client_secrets.json',
-            scope='https://www.googleapis.com/auth/admin.directory.group.readonly',
-            message='oops',
-        )
-        storage = Storage('tokens.dat')
-        credentials = storage.get()
-        if credentials is None or credentials.invalid:
-            credentials = run(flow, storage)
-
-        http = httplib2.Http()
-        http = credentials.authorize(http)
-
-        service = build('admin', 'directory_v1', http=http)
+        service = directory_service()
 
         groups = Group.objects.all()
         for group in groups:
